@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 
 function Form() {
-  const [formData, setFormData] = useState({
+  const initialFormState = {
     firstname: "",
     lastname: "",
     admin: false
-  });
+  }
+  const [formData, setFormData] = useState(initialFormState);
 
   function handleChange(e) {
     const name = e.target.name
@@ -21,13 +22,23 @@ function Form() {
   function handleSubmit(e) {
     e.preventDefault();
     console.log(formData);
-    e.target.reset()
+    setFormData(initialFormState)
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" name="firstname" onChange={handleChange}/>
-      <input type="text" name="lastname" onChange={handleChange}/>
+      <input 
+        type="text" 
+        name="firstname" 
+        onChange={handleChange}
+        value={formData.firstname}
+      />
+      <input 
+        type="text" 
+        name="lastname" 
+        onChange={handleChange}
+        value={formData.lastname}
+      />
       <input
         type="checkbox"
         name="admin"
